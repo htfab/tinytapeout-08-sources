@@ -1,0 +1,25 @@
+* NGSPICE file created from sky130_leo_ip__levelshifter_down.ext - technology: sky130A
+
+.subckt nfet$3 a_60_n40# a_160_0# a_0_0# a_n149_n154#
+X0 a_160_0# a_60_n40# a_0_0# a_n149_n154# sky130_fd_pr__nfet_g5v0d10v5 ad=0.3 pd=2.6 as=0.3 ps=2.6 w=1 l=0.5
+.ends
+
+.subckt nfet a_90_0# a_48_124# a_n123_n128# a_0_0#
+X0 a_90_0# a_48_124# a_0_0# a_n123_n128# sky130_fd_pr__nfet_01v8 ad=0.126 pd=1.44 as=0.126 ps=1.44 w=0.42 l=0.15
+.ends
+
+.subckt pfet$3 a_90_0# w_n184_n189# a_0_0# a_48_240#
+X0 a_90_0# a_48_240# a_0_0# w_n184_n189# sky130_fd_pr__pfet_01v8 ad=0.3 pd=2.6 as=0.3 ps=2.6 w=1 l=0.15
+.ends
+
+.subckt pfet$1 a_60_n40# w_n242_n247# a_160_0# a_0_0#
+X0 a_160_0# a_60_n40# a_0_0# w_n242_n247# sky130_fd_pr__pfet_g5v0d10v5 ad=0.126 pd=1.44 as=0.126 ps=1.44 w=0.42 l=0.5
+.ends
+
+.subckt sky130_leo_ip__levelshifter_down VDDOUT OUT IN VGND
+Xnfet$3_0 IN m1_306_395# VGND VGND nfet$3
+Xnfet_0 OUT m1_306_395# VGND VGND nfet
+Xpfet$3_0 VDDOUT VDDOUT OUT m1_306_395# pfet$3
+Xpfet$1_0 IN VDDOUT VDDOUT m1_306_395# pfet$1
+.ends
+

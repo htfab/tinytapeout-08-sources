@@ -1,0 +1,37 @@
+* NGSPICE file created from sky130_leo_ip__levelshifter_up.ext - technology: sky130A
+
+.subckt pfet a_60_n40# w_n93_n108# a_160_0# a_0_0#
+X0 a_160_0# a_60_n40# a_0_0# w_n93_n108# sky130_fd_pr__pfet_g5v0d10v5 ad=0.126 pd=1.44 as=0.126 ps=1.44 w=0.42 l=0.5
+.ends
+
+.subckt pfet$6 w_n93_n176# a_60_n106# a_160_0# a_0_0#
+X0 a_160_0# a_60_n106# a_0_0# w_n93_n176# sky130_fd_pr__pfet_g5v0d10v5 ad=0.126 pd=1.44 as=0.126 ps=1.44 w=0.42 l=0.5
+.ends
+
+.subckt pfet$4 a_90_0# w_n61_n76# a_0_0# a_48_240#
+X0 a_90_0# a_48_240# a_0_0# w_n61_n76# sky130_fd_pr__pfet_01v8 ad=0.3 pd=2.6 as=0.3 ps=2.6 w=1 l=0.15
+.ends
+
+.subckt nfet a_60_n40# a_160_0# a_0_0# VSUBS
+X0 a_160_0# a_60_n40# a_0_0# VSUBS sky130_fd_pr__nfet_g5v0d10v5 ad=0.3 pd=2.6 as=0.3 ps=2.6 w=1 l=0.5
+.ends
+
+.subckt pfet$5 a_90_0# w_n61_n76# a_0_0# a_48_240#
+X0 a_90_0# a_48_240# a_0_0# w_n61_n76# sky130_fd_pr__pfet_01v8 ad=0.3 pd=2.6 as=0.3 ps=2.6 w=1 l=0.15
+.ends
+
+.subckt nfet$2 a_90_0# a_48_124# a_0_0# VSUBS
+X0 a_90_0# a_48_124# a_0_0# VSUBS sky130_fd_pr__nfet_01v8 ad=0.126 pd=1.44 as=0.126 ps=1.44 w=0.42 l=0.15
+.ends
+
+.subckt sky130_leo_ip__levelshifter_up VDDOUT VDDIN OUT IN VGND
+Xpfet_0 m1_1819_376# VDDOUT VDDOUT OUT pfet
+Xpfet$6_0 VDDOUT OUT VDDOUT m1_1819_376# pfet$6
+Xpfet$4_0 VDDIN VDDIN m2_686_611# IN pfet$4
+Xnfet_0 m1_932_445# m1_1819_376# VGND VGND nfet
+Xnfet_1 m2_686_611# OUT VGND VGND nfet
+Xpfet$5_0 VDDIN VDDIN m1_932_445# m2_686_611# pfet$5
+Xnfet$2_0 m1_932_445# m2_686_611# VGND VGND nfet$2
+Xnfet$2_1 m2_686_611# IN VGND VGND nfet$2
+.ends
+

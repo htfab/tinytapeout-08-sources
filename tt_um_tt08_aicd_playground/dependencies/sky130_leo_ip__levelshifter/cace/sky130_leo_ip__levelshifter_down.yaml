@@ -1,0 +1,188 @@
+name:           sky130_leo_ip__levelshifter_down
+description:    A simple levelshifter intended for 3.3V to 1.8V
+PDK:            sky130A
+
+cace_format:    5.2
+
+authorship:
+  designer:         Leo Moser
+  creation_date:    July 29, 2024
+  license:          Apache 2.0
+
+paths:
+  root:             ..
+  schematic:        xschem
+  layout:           gds
+  netlist:          netlist
+  documentation:    docs/sky130_leo_ip__levelshifter_down
+
+pins:
+  VGND:
+    description: Ground
+    type: ground
+    direction: inout
+  VDDOUT:
+    description: High Voltage
+    type: supply
+    direction: inout
+  IN:
+    description: Input
+    type: signal
+    direction: input
+  OUT:
+    description: Output
+    type: signal
+    direction: output
+
+default_conditions:
+  vddin:
+    description: Input low voltage
+    display: Vddin
+    unit: V
+    typical: 1.8
+  vddout:
+    description: Output high voltage
+    display: Vddout
+    unit: V
+    typical: 3.3
+  cl:
+    description: Output load capacitance
+    display: CLoad
+    unit: fF
+    typical: 50
+  corner:
+    description: Process corner
+    display: Corner
+    typical: tt
+  temperature:
+    description: Ambient temperature
+    display: Temp
+    unit: °C
+    typical: 27
+
+parameters:
+
+  rise_fall_time:
+    description: Rise and fall time from 10% to 90%
+    display: Rise and Fall time
+    unit: ns
+    spec:
+      rise:
+        description: Rise time from 10% to 90%
+        display: Rise time
+        minimum:
+          value: any
+        typical:
+          value: any
+        maximum:
+          value: any
+      fall:
+        description: Fall time from 10% to 90%
+        display: Fall time
+        minimum:
+          value: any
+        typical:
+          value: any
+        maximum:
+          value: any
+    tool:
+      ngspice:
+        template: rise_fall_down.sch
+        format: ascii
+        suffix: .data
+        variables: [rise, fall]
+    plot:
+      rise_vs_temp:
+        type: xyplot
+        xaxis: temperature
+        yaxis: rise
+      fall_vs_temp:
+        type: xyplot
+        xaxis: temperature
+        yaxis: fall
+    conditions:
+      cl:
+        typical: 50
+      corner:
+        enumerate: [tt, ff, ss, fs, sf]
+      temperature:
+        minimum: -40
+        typical: 27
+        maximum: 130
+
+  magic_area:
+    spec:
+      area:
+        display: Area
+        description: Total circuit layout area
+        unit: µm²
+        maximum:
+          value: any
+      width:
+        display: Width
+        description: Total circuit layout width
+        unit: µm
+        maximum:
+          value: any
+      height:
+        display: Height
+        description: Total circuit layout height
+        unit: µm
+        maximum:
+          value: any
+    tool:
+      magic_area
+
+  magic_drc:
+    description: Magic DRC
+    display: Magic DRC
+    spec:
+      drc_errors:
+        maximum:
+          value: 0
+    tool:
+      magic_drc:
+        gds_flatten: true
+
+  netgen_lvs:
+    description: Netgen LVS
+    display: Netgen LVS
+    spec:
+      lvs_errors:
+        maximum:
+          value: 0
+    tool:
+      netgen_lvs
+
+  klayout_drc_feol:
+    description: KLayout DRC feol
+    display: KLayout DRC feol
+    spec:
+      drc_errors:
+        maximum:
+          value: 0
+    tool:
+        klayout_drc:
+            args: ['-rd', 'feol=true']
+
+  klayout_drc_beol:
+    description: KLayout DRC beol
+    display: KLayout DRC beol
+    spec:
+      drc_errors:
+        maximum:
+          value: 0
+    tool:
+        klayout_drc:
+            args: ['-rd', 'beol=true']
+
+  klayout_drc_full:
+    description: KLayout DRC full
+    display: KLayout DRC full
+    spec:
+      drc_errors:
+        maximum:
+          value: 0
+    tool:
+        klayout_drc:
+            args: ['-rd', 'feol=true', '-rd', 'beol=true', '-rd', 'offgrid=true']
