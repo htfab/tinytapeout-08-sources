@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (C) 2024, Tiny Tapeout LTD
+# Author: Uri Shaked
+
 import json
 import logging
 import os
@@ -35,5 +39,5 @@ def clone_source_repos():
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level = logging.INFO)
+    logging.basicConfig(level=logging.INFO)
     clone_source_repos()
