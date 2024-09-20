@@ -155,6 +155,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       OPENLANE_TAG: ${{ github.event.inputs.openlane_tag || '2.1.5' }}
+      OPENLANE_IMAGE_OVERRIDE: htms/openlane2:pr552
       PDK_ROOT: /home/runner/.volare
       PDK: sky130A
 
